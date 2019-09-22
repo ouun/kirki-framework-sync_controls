@@ -10,9 +10,14 @@ function kirkiTooltipAdd( control ) {
 			return;
 		}
 
-		const trigger   = '<span class="tooltip-trigger" data-setting="' + tooltip.id + '"><span class="dashicons dashicons-editor-help"></span></span>';
+		// The control ID. Will be used to manipulate the DOM.
 		const controlID = '#customize-control-' + tooltip.id;
-		const content   = '<div class="tooltip-content hidden" data-setting="' + tooltip.id + '">' + tooltip.content + '</div>';
+
+		// The trigger markup.
+		const trigger = '<span class="tooltip-trigger" data-setting="' + tooltip.id + '"><span class="dashicons dashicons-editor-help"></span></span>';
+
+		// Build the tooltip content.
+		const content = '<div class="tooltip-content hidden" data-setting="' + tooltip.id + '">' + tooltip.content + '</div>';
 
 		// Add the trigger & content.
 		jQuery( '<div class="tooltip-wrapper">' + trigger + content + '</div>' ).prependTo( controlID );
@@ -22,6 +27,9 @@ function kirkiTooltipAdd( control ) {
 			jQuery( '.tooltip-content[data-setting="' + tooltip.id + '"]' ).toggleClass( 'hidden' );
 		} );
 	} );
+}
+
+jQuery( document ).ready( function() {
 
 	// Close tooltips if we click anywhere else.
 	jQuery( document ).mouseup( function( e ) {
@@ -32,9 +40,6 @@ function kirkiTooltipAdd( control ) {
 			}
 		}
 	} );
-}
-
-jQuery( document ).ready( function() {
 
 	wp.customize.control.each( function( control ) {
 		wp.customize.section( control.section(), function( section ) {
