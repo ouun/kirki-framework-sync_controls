@@ -1,7 +1,7 @@
 <?php
 /**
  * Syncs Customizer controls until user overwrites the master value.
- * This is based on the structure that Kirki Modules by Ari Stathopoulos (@aristath) uses
+ * This is based on the fantastic Kirki by Ari Stathopoulos (@aristath)
  *
  * @package   Kirki
  * @category  Modules
