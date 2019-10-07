@@ -1,15 +1,15 @@
 {
-    "name": "kirki-framework/module-tooltips",
+    "name": "ouun/kirki-module-sync_controls ",
     "type": "library",
-    "description": "Tooltips Module for the Kirki WordPress plugin.",
+    "description": "Sync Module for the Kirki WordPress plugin.",
     "keywords": ["wordpress","customizer","framework"],
     "homepage": "https://aristath.github.io/kirki",
     "license": "MIT",
     "authors": [
         {
-            "name": "Ari Stathopoulos",
-            "email": "aristath@gmail.com",
-            "homepage": "http://aristath.github.io",
+            "name": "Philipp",
+            "email": "philipp@ouun.io",
+            "homepage": "https://ouun.io",
             "role": "Developer"
         }
     ],
