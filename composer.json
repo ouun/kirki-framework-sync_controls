@@ -1,14 +1,13 @@
 {
-    "name": "ouun/kirki-module-sync_controls ",
+    "name": "ouun/kirki-module-sync_controls",
     "type": "library",
     "description": "Sync Module for the Kirki WordPress plugin.",
     "keywords": ["wordpress","customizer","framework"],
-    "homepage": "https://aristath.github.io/kirki",
     "license": "MIT",
     "authors": [
         {
-            "name": "Philipp",
-            "email": "philipp@ouun.io",
+            "name": "Philipp Wellmer",
+            "email": "philipp@wellmer.com",
             "homepage": "https://ouun.io",
             "role": "Developer"
         }
