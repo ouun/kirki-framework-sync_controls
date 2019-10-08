@@ -1,4 +1,5 @@
 ( function( $, api ) {
+
 	wp.customize.bind( 'ready', function() {
   
 	  let syncedControls = [];
@@ -11,7 +12,7 @@
 		  if ( controlHasMaster ){
 			let controlMasterID = controlHasMaster[0].match(/"(.*?)"/)[0].replace(/['"]+/g, '');
 			// console.log( 'Sync ' + control.id + ' with ' + controlMasterID );
-  
+
 			syncedControls.push({
 			  masterID: controlMasterID,
 			  slaveID: control.id,
