@@ -14,22 +14,14 @@
 namespace Kirki\Module;
 
 use Kirki\URL;
+use WP_Customize_Manager;
 
 /**
- * Adds the tooltips.
+ * Adds the Sync Module
  *
  * @since 1.0
  */
 class Sync {
-
-	/**
-	 * An array containing field identifieds and their tooltips.
-	 *
-	 * @access private
-	 * @since 1.0
-	 * @var array
-	 */
-	private $tooltips_content = [];
 
 	/**
 	 * The class constructor
@@ -38,6 +30,7 @@ class Sync {
 	 * @since 1.0
 	 */
 	public function __construct() {
+		add_action( 'customize_controls_print_footer_scripts', [ $this, 'customize_controls_enqueue_scripts' ] );
 		add_action( 'customize_controls_enqueue_scripts', [ $this, 'customize_controls_enqueue_scripts' ] );
 		add_filter( 'kirki_field_add_control_args', [ $this, 'filter_control_args' ], 10, 2 );
 	}
@@ -49,8 +42,11 @@ class Sync {
 	 * @since 1.0
 	 */
 	public function customize_controls_enqueue_scripts() {
+		// Todo: Replace this back to __DIR__
+		$path = get_theme_file_path( '/vendor/ouun/kirki-module-sync_controls/src/script.js'  );
+
 		wp_enqueue_script(
-			'kirki-sync', URL::get_from_path( __DIR__ . '/script.js'),
+			'kirki-sync', URL::get_from_path( $path ),
 			array(
 				'customize-controls',
 				'customize-base',
@@ -63,7 +59,7 @@ class Sync {
 			'1.0.0',
 			true
 		);
-		wp_enqueue_style( 'kirki-tooltip', URL::get_from_path( __DIR__ . '/styles.css' ), [], '4.0' );
+		// wp_enqueue_style( 'kirki-tooltip', URL::get_from_path( readlink( __DIR__ ) . '/styles.css' ), [], '4.0' );
 	}
 
 	/**

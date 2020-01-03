@@ -1,14 +1,14 @@
 ( function( $, api ) {
 
 	wp.customize.bind( 'ready', function() {
-  
+
 	  let syncedControls = [];
-  
+
 	  // Collect Masters with their Slaves to loop through them
 	  api.control.each( function ( control ) {
 		if ( control.params.inputAttrs !== undefined ) {
 		  let controlHasMaster = control.params.inputAttrs.toString().match(/data-sync-master="(.*?)"/);
-  
+
 		  if ( controlHasMaster ){
 			let controlMasterID = controlHasMaster[0].match(/"(.*?)"/)[0].replace(/['"]+/g, '');
 			// console.log( 'Sync ' + control.id + ' with ' + controlMasterID );
@@ -20,7 +20,7 @@
 		  }
 		}
 	  });
-  
+
 	  // Loop through Masters with Slaves object to set-up syncs for each slave
 	  $.each( syncedControls, function( index, sync ) {
 		api( sync.masterID, sync.slaveID, function( master, slave ) {
@@ -29,12 +29,12 @@
 			  slaveDescription    = slaveItem.params.description,
 			  slaveValue          = slave.instance(),
 			  masterValue         = master.instance();
-  
+
 		  // Append "Sync-Indicator" link, which focus master control
 		  // todo: Temporary fix until Kirki uses more React
 		  if ( slaveItem.params.choices.type !== 'hidden' ) {
 			let append = '<sup class="sync-indicator"><small><a onclick="wp.customize.control(\'' + master.id + '\').focus();"> AUTO </a></small></sup>';
-  
+
 			if( $( slaveItem.selector + ' label' ).length ) {
 			  // Works for react field
 			  $( slaveItem.selector + ' label' ).append(append);
@@ -47,15 +47,15 @@
 			  }
 			}
 		  }
-  
+
 		  // Set overwrite if slave is empty
 		  let overwrite = slave.instance() === '';
-  
+
 		  // Initially set slave value to master default if empty
 		  if ( slave.instance() === '' ) {
 			if (overwrite) slave.set( master.instance() );
 		  }
-  
+
 		  slave.bind( function() {
 			// Keep fields synced (Overwrite) if slave is empty
 			overwrite = slave.instance() === '';
@@ -71,10 +71,10 @@
 			// Update to new value
 			slaveValue = slave.instance();
 			// console.log('SLAVE: ' + overwrite + ' ' + slave.instance());
-  
+
 			updateSlave( overwrite, slaveItem );
 		  });
-  
+
 		  master.bind( function() {
 			// Keep fields synced if same values (check against old value)
 			if ( masterValue === slaveValue ) overwrite = true;
@@ -83,11 +83,11 @@
 			// Update to new value
 			masterValue = master.instance();
 			//console.log('CHANGE: ' + overwrite + ' ' + master.instance());
-  
+
 			// Let's update the slaves
 			updateSlave( overwrite, slaveItem );
 		  });
-  
+
 		  function updateSlave( overwrite, slaveItem ) {
 			if ( overwrite ) {
 			  // Switch Sync-Indicator text
@@ -98,7 +98,7 @@
 			  $(slaveItem.selector).find('.sync-indicator a').text( ' CUSTOM ' );
 			}
 		  }
-  
+
 		});
 	  });
 	});
