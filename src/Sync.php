@@ -30,9 +30,9 @@ class Sync {
 	 * @since 1.0
 	 */
 	public function __construct() {
-		add_action( 'customize_controls_print_footer_scripts', [ $this, 'customize_controls_enqueue_scripts' ] );
-		add_action( 'customize_controls_enqueue_scripts', [ $this, 'customize_controls_enqueue_scripts' ] );
-		add_filter( 'kirki_field_add_control_args', [ $this, 'filter_control_args' ], 10, 2 );
+		add_action( 'customize_controls_print_footer_scripts', array( $this, 'customize_controls_enqueue_scripts' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customize_controls_enqueue_scripts' ) );
+		add_filter( 'kirki_field_add_control_args', array( $this, 'filter_control_args' ), 10, 2 );
 	}
 
 	/**
@@ -42,11 +42,10 @@ class Sync {
 	 * @since 1.0
 	 */
 	public function customize_controls_enqueue_scripts() {
-		// Todo: Replace this back to __DIR__
-		$path = get_theme_file_path( '/vendor/ouun/kirki-module-sync_controls/src/script.js'  );
-
+		$path = get_theme_file_path( __DIR__ . '/script.js' );
 		wp_enqueue_script(
-			'kirki-sync', URL::get_from_path( $path ),
+			'kirki-sync',
+			URL::get_from_path( $path ),
 			array(
 				'customize-controls',
 				'customize-base',
@@ -59,7 +58,6 @@ class Sync {
 			'1.0.0',
 			true
 		);
-		// wp_enqueue_style( 'kirki-tooltip', URL::get_from_path( readlink( __DIR__ ) . '/styles.css' ), [], '4.0' );
 	}
 
 	/**
