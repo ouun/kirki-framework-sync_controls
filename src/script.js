@@ -31,13 +31,18 @@
 			  masterValue         = master.instance();
 
 		  // Append "Sync-Indicator" link, which focus master control
-		  // todo: Temporary fix until Kirki uses more React
 		  if ( slaveItem.params.choices.type !== 'hidden' ) {
+
 			let append = '<sup class="sync-indicator"><small><a onclick="wp.customize.control(\'' + master.id + '\').focus();"> AUTO </a></small></sup>';
 
+			// Support React- & Non-React controls
 			if( $( slaveItem.selector + ' label' ).length ) {
-			  // Works for react field
-			  $( slaveItem.selector + ' label' ).append(append);
+			  	// Works for react field
+				if ( slaveLabel !== '' ) {
+					$( slaveItem.selector + ' label' ).append(append);
+				} else if ( slaveDescription !== '' ) {
+					slaveItem.params.description = slaveDescription + append;
+				}
 			} else {
 			  // Kirki Backwards compatibility
 			  if ( slaveLabel !== '' ) {
@@ -82,7 +87,7 @@
 			if ( overwrite ) slave.link( master );
 			// Update to new value
 			masterValue = master.instance();
-			//console.log('CHANGE: ' + overwrite + ' ' + master.instance());
+			// console.log('CHANGE: ' + overwrite + ' ' + master.instance());
 
 			// Let's update the slaves
 			updateSlave( overwrite, slaveItem );
@@ -92,8 +97,6 @@
 			if ( overwrite ) {
 			  // Switch Sync-Indicator text
 			  $(slaveItem.selector).find('.sync-indicator a').text( ' AUTO ' );
-			  // If it is a color field, update all Slaves with Master value!
-			  $(slaveItem.selector).find('.wp-color-picker').wpColorPicker('color', masterValue);
 			} else {
 			  $(slaveItem.selector).find('.sync-indicator a').text( ' CUSTOM ' );
 			}
