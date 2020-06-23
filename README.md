@@ -7,7 +7,7 @@ That is basically what this is all about.
 - WordPress >= 4.6
 
 ## Which controls are supported
-So far this is tested with the following Kirki Controls. But it could work with others out of the box, too:
+So far this is tested with the following Kirki Controls and should work with others out of the box, too:
 - Color: https://github.com/kirki-framework/control-color/
 - Multicolor: https://github.com/kirki-framework/field-multicolor
 - Typography: https://github.com/kirki-framework/field-typography
@@ -108,8 +108,8 @@ Currently you need to define each control you want to sync individually:
       
 ## Sync indicator
 
-Controls which have a master sync defined have a indicator appended to the label. 
-It is linked to focus the master control on click and either labels `AUTO` as long as it is in sync or 'CUSTOM' if the value is overwritten.
+Controls which have a master sync defined have an indicator appended to the label. 
+It is linked to focus the master control on a click and either labels `AUTO` as long as it is in sync or 'CUSTOM' if the value is overwritten.
 
 
 
